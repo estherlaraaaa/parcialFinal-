@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 Administrador de editores
+
+  form(action="#", method="post" name="editoresForm")
+    label(for="name") Nombre
+    input(type="text" name="name")
+    label(for="propietario") Propietario 
+    input(type="text" name="propietario")
+    input(type="submit", value="Guardar" name="submit" class="btn btn-success")
+
+  table
+    thead
+      th Nombre
+      th Propietario 
+      th Opciones 
+    tbody#tablaBody 
+
+  script(src="./javascripts/main.js")
+  
