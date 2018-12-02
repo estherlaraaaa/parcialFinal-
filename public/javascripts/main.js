@@ -1,5 +1,5 @@
 window.onload = () => {
-    let form = document.editoresForm;
+    var form = document.editoresForm;
 
     form.addEventListener('submit', () => {
         event.preventDefault();
@@ -14,7 +14,7 @@ window.onload = () => {
                 method: 'POST',
                 body: JSON.stringify(editores),
                 headers: {
-                    'Content-type': 'aplication/json',
+                    'Content-type': 'application/json',
                 }
             })
                 .then(res => { return res.json() })
@@ -33,8 +33,8 @@ window.onload = () => {
         .then(res => { return res.json() })
         .then(data => {
             if (data.ok) {
-                let data = data.editores;
-                data.data.forEach(element => {
+                let editores = data.editor;
+                editores.forEach(element => {
                     addrow(element);
                 })
             }
@@ -57,33 +57,33 @@ function addrow(editores) {
     td_propietario.innerText = editores.propietario;
     tr.appendChild(td_propietario);
 
-    td_edit.innerHTML = '<a href="#"> EDIT </a>';
+    td_edit.innerHTML = '<a href="#" class="btn btn-warning"> EDIT </a>';
     tr.appendChild(td_edit);
 
-    td_delete.innerHTML = '<a href="#"> DELETE </a>';
+    td_delete.innerHTML = '<a href="#" class="btn btn-danger"> DELETE </a>';
     tr.appendChild(td_delete);
 
     tr.setAttribute("data-editoresId", editores._id);
     tbody.appendChild(tr);
 
-    td_edit.childNodes[0].addEventListener('clic', function () {
+    td_edit.childNodes[0].addEventListener('click', function () {
         edit(editores._id)
     });
 
-    td_delete.childNodes[0].addEventListener('clic', function () {
+    td_delete.childNodes[0].addEventListener('click', function () {
         del(editores._id)
     });
 }
 
 function del(editoresId) {
     fetch('/editores/' + editoresId, {
-        method: 'DELETE ',
+        method: 'DELETE',
     })
         .then(res => { return res.json() })
         .then(deleted => {
             if (deleted.ok) {
                 var to_remove = document.querySelector('[data-editoresId="' + editoresId + '"]');
-                to: removeEventListener.parentNode.removeChild(to_remove);
+                to_remove.parentNode.removeChild(to_remove);
             }
         });
 }
@@ -108,14 +108,14 @@ function edit(editoresId) {
     update_btn.type = "submit";
     update_btn.name = "up_submit";
     update_btn.value = "update";
-    update_btn.className = "btn btn-warning"; 
+    update_btn.className = "btn btn-warning";
 
     tr.appendChild(update_btn);
 
-    update_btn.addEventListener('clic', function () {
+    update_btn.addEventListener('click', function () {
         let updated = {
-            name: childre[0].firstChild.value,
-            propietario: childre[1].firstChild.value,
+            name: children[0].firstChild.value,
+            propietario: children[1].firstChild.value,
         };
 
         if (!updated.name == "" && !updated.propietario == "") {
@@ -123,7 +123,7 @@ function edit(editoresId) {
                 method: 'POST',
                 body: JSON.stringify(updated),
                 headers: {
-                    'Content-type': 'aplication/json',
+                    'Content-type': 'application/json',
                 }
             })
                 .then(res => { return res.json() })
@@ -150,18 +150,18 @@ function edit(editoresId) {
                         td_delete.innerHTML = '<a href="#"> DELETE </a>';
                         tr.appendChild(td_delete);
 
-                        tr.setAttribute("data-editoresId", editores._id);
+                        tr.setAttribute("data-editoresId", editor._id);
                         tbody.appendChild(tr);
 
-                        td_edit.childNodes[0].addEventListener('clic', function () {
+                        td_edit.childNodes[0].addEventListener('click', function () {
                             edit(editores._id)
                         });
-
-                        td_delete.childNodes[0].addEventListener('clic', function () {
+                    
+                        td_delete.childNodes[0].addEventListener('click', function () {
                             del(editores._id)
                         });
                     }
-                }); 
+                });
         }
 
     })

@@ -1,12 +1,12 @@
 const editores = require ('../models/editores'); 
 
 exports.create = (req, res) => {
-    
+    console.log(req.body);
     let claseNueva = new editores({
         name: req.body.name,
         propietario: req.body.propietario, 
     });
-
+    
     claseNueva.save()
     .then(data =>{
         res.send({

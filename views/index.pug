@@ -3,18 +3,22 @@ extends layout
 block content
   h1 Administrador de editores
 
-  form(action="#", method="post" name="editoresForm")
-    label(for="name") Nombre
-    input(type="text" name="name")
-    label(for="propietario") Propietario 
-    input(type="text" name="propietario")
+  form(action="#", method="post" name="editoresForm" )
+    label(for="name" ) Nombre
+    input(type="text" name="name" class="input-group mb-3" )
+    label(for="propietario" ) Propietario 
+    input(type="text" name="propietario" class="input-group mb-3")
     input(type="submit", value="Guardar" name="submit" class="btn btn-success")
+    br
+    br
 
-  table
+
+  table(class="table table-bordered table striped")
     thead
       th Nombre
-      th Propietario 
+      th Propietario
       th Opciones 
+      th Opciones
     tbody#tablaBody 
 
   script(src="./javascripts/main.js")
